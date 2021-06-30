@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+
+<body>
+
+    <h1>My trip Planner</h1>
+
+    <h2>Train details</h2>
+
+    <ul>
+        <li>Trains:-
+        {{#each trainData}}
+            <ul>
+                <li>Train Name: {{this.trainName}}</li>
+                <li>Train Dept No: {{this.trainDeptNo}}</li>
+                <li>Train Departure Time: {{this.departTime}}</li>
+                <li>Train Arrival Time: {{this.arrivalTime}}</li>
+                <li>From Station: {{this.fromStaion}}</li>
+                <li>To Station: {{this.toStation}}</li>
+                <li>Prices and availabality:
+                    <ul>
+                        {{#each this.railClass}}
+                        <li>Rail Class:
+                            <ul>
+                                <li>Rail Class Name: {{this.railClassName}}</li>
+                                <li>Ticket Price: {{this.ticketPrice}}</li>
+                                <li>Availabe Seats: {{this.availableSeats}}</li>
+                            </ul>
+                        </li>
+                        {{/each}}
+                        {{!-- <li>this.rai</li> --}}
+                    </ul>
+                </li>
+            </ul>
+        {{/each}}
+        </li>
+    </ul>
+
+    <ul>
+        <li>Hotels:-
+        {{#each hotelData}}
+            <ul>
+                <li>Hotel Name: {{this.hotelName}}</li>
+                <li>Hotel Address: {{this.hotelAddress}}</li>
+                <li>Hotel Price: {{hotelPrice}}</li>
+                <img src={{this.imgUrl}}>
+            </ul>    
+        {{/each}}
+        </li>
+    </ul>
+
+    <ul>
+        <li>Tourist Places:-
+        {{#each touristSpots}}
+            <ul>
+                <li>Place Name: {{this.placeName}}</li>
+                <li>{{this.placeDesc}}</li>
+                <img src={{this.imageURL}}>
+            </ul>    
+        {{/each}}
+        </li>
+    </ul>
+
+</body>
+
+</html>

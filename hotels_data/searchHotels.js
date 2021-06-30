@@ -1,4 +1,5 @@
 const loginHandler = require('../utilities/loginHandler');
+const placeNames = require('../utilities/placeNames');
 const selectDate = require('../utilities/selectDate');
 const hotelDataScrap = require('./hotelDataScrap');
 
@@ -11,11 +12,15 @@ async function searchHotels(tab){
     await tab.click('[data-cy="city"]');
 
     await tab.waitForSelector('input[autocomplete]', {visible: true});
-    await tab.type('input[autocomplete]', "lucknow", {delay: 50});
+    await tab.type('input[autocomplete]', placeNames.toPlace, {delay: 50});
 
     await tab.waitForTimeout(500);
 
-    let toCity = await tab.$('#react-autowhatever-1 li');
+    let toCity = await tab.$('#react-autowhatever-1 .spaceBetween.makeFlex.hrtlCenter.regionLists');
+    if(toCity == null){
+        toCity = await tab.$('#react-autowhatever-1 li');
+    }
+
     await toCity.click();
 
     await tab.waitForTimeout(500);

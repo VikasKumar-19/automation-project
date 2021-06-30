@@ -1,5 +1,5 @@
 const pup = require('puppeteer');
-
+const cp = require('child_process');
 //We will get searchTrains() function on requiring this file.
 //This function helps to search Trains and fetch details about them.
 const searchTrains = require('./train_data/searchTrains');
@@ -27,5 +27,10 @@ const findTouristSpots = require('./tourist_spots/findTouristSpots');
 
     let tab3 = await browser.newPage();
     await findTouristSpots(tab3);
+
+    await cp.exec("node ./server.js");
+
+    let tab4 = await browser.newPage();
+    await tab4.goto("http://localhost:4444")
 
 })();

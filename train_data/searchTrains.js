@@ -3,9 +3,7 @@
 const scrapTrainData = require('./trainDataScrap');
 const loginHandler = require('../utilities/loginHandler');
 const selectDate = require('../utilities/selectDate');
-
-
-let date = "23 August 2021";
+const placeNames = require('../utilities/placeNames');
 
 async function searchTrains(tab){
 
@@ -22,7 +20,7 @@ async function searchTrains(tab){
 
     await tab.click('[for="fromCity"]');
 
-    await tab.type('input[autocomplete="off"]', "new delhi", {delay: 100});
+    await tab.type('input[autocomplete="off"]', placeNames.fromPlace, {delay: 100});
 
     await tab.waitForTimeout(500);
 
@@ -33,7 +31,7 @@ async function searchTrains(tab){
     await tab.waitForTimeout(1000);
 
     //here we are entering the the destination place where user want to go.
-    await tab.type('input[autocomplete="off"]', "lucknow", {delay: 100});
+    await tab.type('input[autocomplete="off"]', placeNames.toPlace, {delay: 100});
     
     await tab.waitForTimeout(500);
     
@@ -58,6 +56,9 @@ async function searchTrains(tab){
     //After the navigation we will reach to the new page from where we can get the details of available trains.
 
     await scrapTrainData(tab); //This function calling will fetch all the required details of the available trains.
+
+    
+
 }
 
 module.exports = searchTrains;

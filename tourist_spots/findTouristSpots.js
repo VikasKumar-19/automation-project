@@ -1,7 +1,10 @@
+const placeNames = require("../utilities/placeNames");
+const fs = require('fs')
+
 async function findTouristspots(tab){
     await tab.goto("https://www.google.com/travel");
 
-    await tab.type('#oA4zhb', "lucknow");
+    await tab.type('#oA4zhb', placeNames.toPlace);
 
     await Promise.all([
         tab.keyboard.press('Enter'),
@@ -42,6 +45,8 @@ async function findTouristspots(tab){
     }
 
     console.log(allPlacesData);
+
+    fs.writeFileSync('./touristSpots.json', JSON.stringify(allPlacesData)); 
 }
 
 module.exports = findTouristspots;

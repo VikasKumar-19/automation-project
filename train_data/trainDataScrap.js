@@ -58,6 +58,10 @@ async function scrapTrainData(tab){
                 
             }
 
+            if(availRailClasses.length == 0){
+                availRailClasses = "Not available";
+            }
+
             train.scrollIntoView({behavior: "smooth"});
 
             return {
@@ -76,7 +80,8 @@ async function scrapTrainData(tab){
     }
 
     console.log(allTrainsData);
-    // fs.writeFileSync('./trainsData.json', JSON.stringify(allTrainsData)); // json file
+    fs.writeFileSync('./trainsData.json', JSON.stringify(allTrainsData)); // json file
+
 }
 
 module.exports = scrapTrainData;
