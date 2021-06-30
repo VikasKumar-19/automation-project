@@ -4,10 +4,9 @@ async function scrapTrainData(tab){
     let allTrainsData = [];
     await tab.waitForSelector('.single-train-detail', {visible: true})
     let allTrains = await tab.$$('.single-train-detail');
-    console.log(allTrains.length);
 
-    for(let i = 0; i < 3 && i < allTrains.length; i++){
-        trainData = await tab.evaluate(function(train){
+    for(let i = 0; i < 5 && i < allTrains.length; i++){
+        trainData = await tab.evaluate(async function(train){
 
             let trainName = train.querySelector('.train-name');
             let trainDeptNo = train.querySelector('.flex.train-depart-number div');
@@ -17,14 +16,16 @@ async function scrapTrainData(tab){
             let toStation = arrivalTime.nextSibling.textContent;
 
             function checkAndUpdate(card){ // this will update the status of availability of the particular class of the selected train.
-                try{
-                    let btn = card.querySelector('.update-info-button');
+             
+                let btn = card.querySelector('.update-info-button');
+                if(btn == null){
+                    return;
+                }
+                else{
                     btn.click();
-                    return 1;
+                    return;
                 }
-                catch(err){
-                    return -1;
-                }
+               
             }
 
             let availRailClasses = [];
@@ -33,25 +34,25 @@ async function scrapTrainData(tab){
 
             for(let j = 0; j < availableClasses.length; j++){
 
-                let btnFound = checkAndUpdate(availableClasses[j]);
+                checkAndUpdate(availableClasses[j]);
                 
-                if(btnFound == 1){
-                    let currentTime = new Date().getTime();
-                    while (currentTime + 5000 >= new Date().getTime()){
-                    }
+                try{
+                    let railClass = availableClasses[j].querySelector('.rail-class').textContent;
+                    let railPrice = availableClasses[j].querySelector('.ticket-price').textContent;
+                    let available = availableClasses[j].querySelector('.availibilty-info').textContent;
+                    available = available.split(" ")[1];
+    
+                    availRailClasses.push({
+                        railClassName: railClass,
+                        ticketPrice: railPrice,
+                        availableSeats: available
+                    })
                 }
 
-                let railClass = availableClasses[j].querySelector('.rail-class').textContent;
-                let railPrice = availableClasses[j].querySelector('.ticket-price').textContent;
-                let available = availableClasses[j].querySelector('.availibilty-info').textContent;
+                catch(err){
+                    console.log(err.message);
+                }
                 
-                available = available.split(" ")[1];
-
-                availRailClasses.push({
-                    railClassName: railClass,
-                    ticketPrice: railPrice,
-                    availableSeats: available
-                })
             }
 
             return {
