@@ -6,6 +6,9 @@ async function scrapTrainData(tab){
     let allTrains = await tab.$$('.single-train-detail');
 
     for(let i = 0; i < 5 && i < allTrains.length; i++){
+
+        await tab.waitForTimeout(500);
+
         trainData = await tab.evaluate(async function(train){
 
             let trainName = train.querySelector('.train-name');
@@ -54,6 +57,8 @@ async function scrapTrainData(tab){
                 }
                 
             }
+
+            train.scrollIntoView({behavior: "smooth"});
 
             return {
                 trainName : trainName.textContent,

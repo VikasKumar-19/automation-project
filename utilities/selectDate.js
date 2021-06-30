@@ -28,8 +28,8 @@ async function selectDate(tab){
         }
     });
 
-    console.log(month1);
-    console.log(month2);
+    // console.log(month1);
+    // console.log(month2);
 
     if(givenMonth == month1){
         await pickADay(givenDay, monthsName[0], tab);

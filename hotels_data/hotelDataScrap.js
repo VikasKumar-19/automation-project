@@ -5,15 +5,17 @@ async function hotelDataScrap(tab){
 
     for(let i = 0; i < hotels.length && i < 3; i++){
         
-        let hotelData = await tab.evaluate(function(hotel){
-            hotel.scrollIntoView();
+        await tab.waitForTimeout(500);
 
+        let hotelData = await tab.evaluate(function(hotel){
+            
             let hotelName = hotel.querySelector('[itemprop="name"]').firstElementChild.textContent;
             let hotelAddress = hotel.querySelector('[itemprop="address"]').textContent;
             let hotelPrice = hotel.querySelector('#hlistpg_hotel_shown_price').textContent;
-           
+            
             let allImg = hotel.querySelector('.imgCont img');
-
+            
+            hotel.scrollIntoView({behavior: "smooth"});
 
             return {
                 hotelName,

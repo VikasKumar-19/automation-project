@@ -6,6 +6,8 @@ const searchTrains = require('./train_data/searchTrains');
 
 const searchHotels = require('./hotels_data/searchHotels');
 
+const findTouristSpots = require('./tourist_spots/findTouristSpots');
+
 (async function(){
     const browser = await pup.launch({
             headless:false,
@@ -22,5 +24,8 @@ const searchHotels = require('./hotels_data/searchHotels');
     let tab2 = await browser.newPage();
 
     await searchHotels(tab2);
+
+    let tab3 = await browser.newPage();
+    await findTouristSpots(tab3);
 
 })();
