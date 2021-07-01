@@ -1,0 +1,181 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body{
+    margin: 0;
+    background-color: #c8d6e5;
+}
+
+.container{
+    height: 100%;
+    width: 100%;
+}
+
+.navbar{
+    height: 2rem;
+    width: auto;
+}
+
+.navbar h1{
+    background-color: #353b48;
+    color: white;
+}
+
+.trip{
+    color: rgb(190, 3, 3);
+}
+
+.trains-wrap{
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    background-color: white;
+}
+
+.train-card{
+    width: 80%;
+    height: 15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.train-data{
+    width: 95%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.train-run{
+    width: 100%;
+    height: 60%;
+    padding: 10px;
+    background-color: #130f40;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.train-name-info{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.train-name-info div{
+    height: 20%;
+    width: 100%;
+}
+
+.train-run-info{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.train-run-info div{
+    height: 100%;
+    width: 50%;
+}
+
+
+
+.train-status-price{
+    height: 40%;
+    width: 100%;
+    background-color: #192a56;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.rail-class{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rail-class div{
+    width: 80%;
+    height: 30%;
+}
+
+h2{
+    text-align: center;
+    font-size: 3rem;
+}
+
+h3{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.hotels-wrap{
+    width: auto;
+    height: auto;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #d1fffb;
+
+}
+
+.hotel-card{
+    width: 30rem;
+    height: 18rem;
+    text-align: center;
+    margin-top: 30px;
+    /* margin-left: 20px; */
+   
+    /* background-color: #60a3bc; */
+    border-radius: 10px;
+}
+
+.hotel-name, .place-name{
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.hotel-address,.hotel-price,.place-desc{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.tourist-places-wrap{
+    width: auto;
+    height: auto;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffeaa7;
+}
+
+.place-card{
+    width: 35rem;
+    height: 25rem;
+    text-align: center;
+    margin-top: 30px;
+}
+
+

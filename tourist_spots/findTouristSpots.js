@@ -1,10 +1,12 @@
-const placeNames = require("../utilities/placeNames");
-const fs = require('fs')
+const fs = require('fs');
 
 async function findTouristspots(tab){
     await tab.goto("https://www.google.com/travel");
 
-    await tab.type('#oA4zhb', placeNames.toPlace);
+    let placeObj = fs.readFileSync('./utilities/placeNames.json',{encoding: 'utf-8'})
+    placeObj = JSON.parse(placeObj);
+   
+    await tab.type('#oA4zhb', placeObj.toPlace);
 
     await Promise.all([
         tab.keyboard.press('Enter'),

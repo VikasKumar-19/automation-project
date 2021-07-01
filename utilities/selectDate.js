@@ -1,7 +1,7 @@
-let date = require('./date');
+// let date = require('./date');
 
 // this is a main function for selecting the date.
-async function selectDate(tab){
+async function selectDate(tab, date){
 
     let dateArr = date.split(" ");
     let givenMonth = dateArr[1];
@@ -44,7 +44,7 @@ async function selectDate(tab){
         let btnStatus = await nextMonthHandler(tab);
         if(btnStatus == true){
             // console.log('hi')
-            await selectDate( tab);
+            await selectDate(tab, date);
         }
     }
 }

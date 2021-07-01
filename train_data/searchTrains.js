@@ -3,7 +3,7 @@
 const scrapTrainData = require('./trainDataScrap');
 const loginHandler = require('../utilities/loginHandler');
 const selectDate = require('../utilities/selectDate');
-const placeNames = require('../utilities/placeNames');
+const fs = require('fs');
 
 async function searchTrains(tab){
 
@@ -20,7 +20,10 @@ async function searchTrains(tab){
 
     await tab.click('[for="fromCity"]');
 
-    await tab.type('input[autocomplete="off"]', placeNames.fromPlace, {delay: 100});
+    let placeObj = fs.readFileSync('./utilities/placeNames.json', {encoding: 'utf-8'});
+    placeObj = JSON.parse(placeObj);
+
+    await tab.type('input[autocomplete="off"]', placeObj.fromPlace, {delay: 100});
 
     await tab.waitForTimeout(500);
 
@@ -31,7 +34,7 @@ async function searchTrains(tab){
     await tab.waitForTimeout(1000);
 
     //here we are entering the the destination place where user want to go.
-    await tab.type('input[autocomplete="off"]', placeNames.toPlace, {delay: 100});
+    await tab.type('input[autocomplete="off"]', placeObj.toPlace, {delay: 100});
     
     await tab.waitForTimeout(500);
     
@@ -41,7 +44,11 @@ async function searchTrains(tab){
     await tab.waitForTimeout(1000);
 
     //we have called the function selectDate() which helps to select the date on calendar appears on the page.
-    await selectDate(tab);
+    let dateObj = fs.readFileSync('./utilities/date.json',{encoding: 'utf-8'})
+    dateObj = JSON.parse(dateObj);
+    let date = dateObj.date;
+
+    await selectDate(tab, date);
 
     //we have selected All Classes option which helps to search available trains with all classes.
     let classType = await tab.$('ul.travelForPopup li');
@@ -56,9 +63,6 @@ async function searchTrains(tab){
     //After the navigation we will reach to the new page from where we can get the details of available trains.
 
     await scrapTrainData(tab); //This function calling will fetch all the required details of the available trains.
-
-    
-
 }
 
 module.exports = searchTrains;

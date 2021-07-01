@@ -2,6 +2,10 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+
+let placeObj = fs.readFileSync('./utilities/placeNames.json', {encoding: 'utf-8'});
+placeObj = JSON.parse(placeObj);
+
 let trainData = fs.readFileSync('trainsData.json',{encoding: 'utf-8'})
 trainData = JSON.parse(trainData);
 
@@ -16,11 +20,13 @@ let app = new express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+app.use(express.static(__dirname + '/public'));
 app.set('view engine','hbs')
 
 app.get('/',(req,res)=>{
     return res.render('index',{
         title: "My trip planner",
+        placeObj,
         trainData,
         hotelData,
         touristSpots
